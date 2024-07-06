@@ -34,6 +34,12 @@
           Feels like {{ Math.round(weather.temperature - 2) }}° · Sunset 18:30
         </div>
       </div>
+
+      <!-- Placeholder Text Section -->
+      <div class="placeholder-text" v-if="weather">
+        <h3>Random Text</h3>
+        <p>Get accurate weather forecasts and alerts with our app. Stay informed about current and upcoming conditions with hourly and daily forecasts, radar maps, and severe weather alerts. Customize notifications to fit your needs.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -104,6 +110,7 @@ export default {
 </script>
 
 <style scoped>
+
 .weather-container {
   background-image: url('@/assets/aa.jpg');
   background-size: cover;
@@ -121,6 +128,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column; /* Updated to stack elements vertically */
   min-height: 100vh;
   min-height: 100dvh;
   padding: 1rem;
@@ -133,6 +141,7 @@ export default {
   width: 18rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 2px solid #FFA07A;
+  margin-bottom: 1rem; /* Added spacing */
 }
 
 .header {
@@ -183,5 +192,26 @@ export default {
   color: #FF6347;
   font-size: 0.75rem;
   margin-top: 1rem;
+}
+
+/* Placeholder Text Styles */
+.placeholder-text {
+  padding: 1rem;
+  width: 18rem;
+  text-align: left;
+ 
+ 
+}
+
+.placeholder-text h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.placeholder-text p {
+  font-size: 0.875rem;
+  color: #ccc;
 }
 </style>
