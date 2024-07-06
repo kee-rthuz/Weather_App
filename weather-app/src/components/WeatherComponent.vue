@@ -2,15 +2,15 @@
   <div class="weather-container">
     <div class="content-wrapper">
       <!-- Weather Input -->
-      <div v-if="!weather" class="bg-white/90 rounded-3xl p-6 w-72 shadow-lg">
+      <div v-if="!weather" class="weather-input-container">
         <input
           v-model="location"
-          placeholder="Enter location"
-          class="p-2 rounded-lg border mb-2 w-full"
+          placeholder="City, State/Country"
+          class="weather-input"
         />
         <button
           @click="fetchWeather"
-          class="bg-yellow-500 text-white p-2 rounded-lg w-full hover:bg-yellow-600 transition-colors"
+          class="weather-button"
         >
           Get Weather
         </button>
@@ -110,7 +110,6 @@ export default {
 </script>
 
 <style scoped>
-
 .weather-container {
   background-image: url('@/assets/aa.jpg');
   background-size: cover;
@@ -128,10 +127,44 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; /* Updated to stack elements vertically */
+  flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
   padding: 1rem;
+}
+
+.weather-input-container {
+  display: flex;
+  background-color: white;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+}
+
+.weather-input {
+  flex-grow: 1;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.weather-input::placeholder {
+  color: #999;
+}
+
+.weather-button {
+  background-color: #ff8000;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.weather-button:hover {
+  background-color: #e67300;
 }
 
 .weather-card {
@@ -141,7 +174,7 @@ export default {
   width: 18rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 2px solid #FFA07A;
-  margin-bottom: 1rem; /* Added spacing */
+  margin-bottom: 1rem;
 }
 
 .header {
@@ -194,13 +227,10 @@ export default {
   margin-top: 1rem;
 }
 
-/* Placeholder Text Styles */
 .placeholder-text {
   padding: 1rem;
   width: 18rem;
   text-align: left;
- 
- 
 }
 
 .placeholder-text h3 {
