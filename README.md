@@ -49,7 +49,7 @@ Clone the repository:
 Create a `.env` file in the root directory and add your OpenWeatherMap API key:
 plaintext
 
-``VUE_APP_OPENWEATHERMAP_API_KEY=your_api_key_here`
+`VUE_APP_OPENWEATHERMAP_API_KEY=your_api_key_here`
 
 5. Run the application:
 
