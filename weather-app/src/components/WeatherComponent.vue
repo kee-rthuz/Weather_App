@@ -1,44 +1,46 @@
 <template>
-  <div class="weather-container">
-    <div class="content-wrapper">
+<div class="weather-container  w-full fixed top-0 left-0 bg-cover bg-center bg-no-repeat" :style="{ backgroundImage: 'url(' + require('@/assets/aa.jpg') + ')' }">   
+ <div class="flex justify-center items-center flex-col min-h-screen p-4">
       <!-- Weather Input -->
-      <div v-if="!weather" class="weather-input-container">
+      <div v-if="!weather" class="flex bg-white rounded-md overflow-hidden w-full max-w-sm">
         <input
           v-model="location"
           placeholder="City, State/Country"
-          class="weather-input"
+          class="flex-grow border-none py-2 px-4 text-sm"
         />
         <button
           @click="fetchWeather"
-          class="weather-button"
+          class="bg-weather-orange text-white border-none py-2 px-4 text-sm cursor-pointer transition-colors duration-300 hover:bg-weather-orange-dark"
         >
           Get Weather
         </button>
       </div>
 
       <!-- Weather Display -->
-      <div v-if="weather" class="weather-card">
-        <div class="header">
-          Today <span class="dropdown-arrow">▼</span>
+      <div v-if="weather" class="bg-weather-peach-200 rounded-weather-card p-6 w-weather-card shadow-weather-card border-2 border-weather-peach-300 mb-4">
+        <div class="flex justify-between items-center text-weather-red text-sm font-semibold">
+          Today <span class="text-xs">▼</span>
         </div>
-        <div class="main-content">
-          <div class="temp-and-desc">
-            <div class="temperature">{{ Math.round(weather.temperature) }}°</div>
-            <div class="description">{{ weather.description }}</div>
+        <div class="flex justify-between items-center">
+          <div class="text-left">
+            <div class="text-weather-temp font-bold text-weather-tomato">{{ Math.round(weather.temperature) }}°</div>
+            <div class="text-weather-desc text-weather-red">{{ weather.description }}</div>
           </div>
-          <div class="icon">{{ getWeatherEmoji(weather.icon) }}</div>
+          <div class="text-6xl">{{ getWeatherEmoji(weather.icon) }}</div>
         </div>
-        <div class="location">{{ weather.location }}</div>
-        <div class="date">{{ formattedDate }}</div>
-        <div class="footer">
+        <div class="text-weather-tomato text-sm mt-2">{{ weather.location }}</div>
+        <div class="text-weather-tomato text-sm mt-2">{{ formattedDate }}</div>
+        <div class="text-weather-tomato text-xs mt-4">
           Feels like {{ Math.round(weather.temperature - 2) }}° · Sunset 18:30
         </div>
       </div>
 
       <!-- Placeholder Text Section -->
-      <div class="placeholder-text" v-if="weather">
-        <h3>Random Text</h3>
-        <p>Get accurate weather forecasts and alerts with our app. Stay informed about current and upcoming conditions with hourly and daily forecasts, radar maps, and severe weather alerts. Customize notifications to fit your needs.</p>
+      <div v-if="weather" class="p-4 w-weather-card text-left">
+        <h3 class="text-base font-semibold text-gray-300 mb-2">Random Text</h3>
+        <p class="text-sm text-gray-300">
+          Get accurate weather forecasts and alerts with our app. Stay informed about current and upcoming conditions with hourly and daily forecasts, radar maps, and severe weather alerts. Customize notifications to fit your needs.
+        </p>
       </div>
     </div>
   </div>
@@ -109,139 +111,10 @@ export default {
 };
 </script>
 
-<style scoped>
-.weather-container {
-  background-image: url('@/assets/aa.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-  min-height: 100dvh; /* For mobile browsers */
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
+<style>
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-.content-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 1rem;
-}
 
-.weather-input-container {
-  display: flex;
-  background-color: white;
-  border-radius: 0.25rem;
-  overflow: hidden;
-  width: 100%;
-  max-width: 300px;
-}
-
-.weather-input {
-  flex-grow: 1;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-}
-
-.weather-input::placeholder {
-  color: #999;
-}
-
-.weather-button {
-  background-color: #ff8000;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.weather-button:hover {
-  background-color: #e67300;
-}
-
-.weather-card {
-  background-color: #FFDAB9;
-  border-radius: 1.5rem;
-  padding: 1.5rem;
-  width: 18rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 2px solid #FFA07A;
-  margin-bottom: 1rem;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #FF4500;
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.dropdown-arrow {
-  font-size: 0.75rem;
-}
-
-.main-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.temp-and-desc {
-  text-align: left;
-}
-
-.temperature {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #FF6347;
-}
-
-.description {
-  font-size: 1.25rem;
-  color: #FF4500;
-}
-
-.icon {
-  font-size: 3.75rem;
-}
-
-.location, .date {
-  color: #FF6347;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-}
-
-.footer {
-  color: #FF6347;
-  font-size: 0.75rem;
-  margin-top: 1rem;
-}
-
-.placeholder-text {
-  padding: 1rem;
-  width: 18rem;
-  text-align: left;
-}
-
-.placeholder-text h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #ccc;
-  margin-bottom: 0.5rem;
-}
-
-.placeholder-text p {
-  font-size: 0.875rem;
-  color: #ccc;
-}
 </style>
